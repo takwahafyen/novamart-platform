@@ -1,0 +1,34 @@
+/* HeaderOne.module.css */
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .main-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .menu-left,
+  .menu-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-left {
+    margin-right: auto;
+  }
+  
+  .menu-right {
+    margin-left: auto;
+  }
+  
+  .icon-nav {
+    display: flex;
+    align-items: center;
+  }
+  

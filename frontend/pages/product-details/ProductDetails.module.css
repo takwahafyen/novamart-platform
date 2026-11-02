@@ -1,0 +1,70 @@
+.productImage {
+  max-width: 70%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.productDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.productRating .rating i {
+  color: #ffd700;
+}
+
+.wishlistBtn {
+  background: none;
+  border: none;
+  color: #ff6961;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.wishlistBtn i {
+  margin-right: 5px;
+}
+
+.btnPrimary {
+  margin-top: 20px;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnPrimary:hover {
+  background-color: #0056b3;
+}
+
+.accordion .cardHeader .btn {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: none;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.accordion .cardHeader .btn:hover {
+  background-color: #f1f1f1;
+}
