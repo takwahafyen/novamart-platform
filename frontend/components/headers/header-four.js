@@ -6,7 +6,7 @@ import cart from "../../public/assets/images/icon/cart.png";
 import CartContainer from "../containers/CartContainer";
 import LogoImage from "./common/logo";
 import { Container, Col, Row, Media } from "reactstrap";
-import Currency from "./common/currency";
+import Currency from "./common/Currency";
 import settings from "../../public/assets/images/icon/setting.png";
 import SearchOverlay from "./common/search-overlay";
 

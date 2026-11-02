@@ -88,13 +88,13 @@ This project strictly follows an enterprise Git branching model:
 * **`main` (Production)** : 
   * Protected branch. Only merged via verified Pull Requests.
   * Triggers the production deployment on **Vercel** (frontend) and builds/pushes the Docker image to **GitHub Container Registry (GHCR)**.
-* **`develop` (Staging / Integration)** :
+* **`develop` / `dev` (Staging / Integration)** :
   * Integration branch for pre-production testing and automated CI validation.
 * **`feature/<name>`** :
   * Feature branches branched from `develop` and merged back using PRs.
 
 ```text
-feature/* ──(PR)──> develop ──(PR / Release)──> main ──> Vercel & Docker Build
+feature/* ──(PR)──> dev ──(PR / Release)──> main ──> Vercel & Docker Build
 ```
 
 ---
@@ -103,7 +103,7 @@ feature/* ──(PR)──> develop ──(PR / Release)──> main ──> Ver
 
 | Pipeline | Trigger | Role |
 | :--- | :--- | :--- |
-| **CI Validation** (`ci.yml`) | Push / PR on `main`, `develop` | Syntax validation, dependency check, Next.js build verification |
+| **CI Validation** (`ci.yml`) | Push / PR on `main`, `dev` | Syntax validation, dependency check, Next.js build verification |
 | **Docker Release** (`backend-docker.yml`) | Merge into `main` | Multi-stage build and publish to GitHub Container Registry |
 | **Vercel Deployment** | Git Push / Webhook | Automatic preview (develop) and production release (main) |
 

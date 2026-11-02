@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "./common/navbar";
 import CartContainer from "../containers/CartContainer";
-import Currency from "./common/currency";
+import Currency from "./common/Currency";
 import TopBarDark from "./common/topbar-dark";
 import LogoImage from "./common/logo";
 import { Container, Row, Col, Input, Media } from "reactstrap";

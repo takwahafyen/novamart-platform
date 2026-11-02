@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Currency from "./common/currency";
+import Currency from "./common/Currency";
 import NavBar from "./common/navbar";
 import SideBar from "./common/sidebar";
 import Cart from "../containers/Cart";

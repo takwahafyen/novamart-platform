@@ -6,7 +6,7 @@ import { Media, Row, Col, Container } from "reactstrap";
 import search from "../../public/assets/images/jewellery/icon/search.png";
 import heart from "../../public/assets/images/jewellery/icon/heart.png";
 import avatar from "../../public/assets/images/jewellery/icon/avatar.png";
-import Currency from "./common/currency";
+import Currency from "./common/Currency";
 import cart from "../../public/assets/images/jewellery/icon/cart.png";
 import settings from "../../public/assets/images/jewellery/icon/controls.png";
 import CartContainer from "../containers/CartContainer";

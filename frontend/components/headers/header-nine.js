@@ -7,7 +7,7 @@ import settings from "../../public/assets/images/icon/setting.png";
 import { Media, Container, Row, Col } from "reactstrap";
 import CartContainer from "../containers/CartContainer";
 import cart from "../../public/assets/images/icon/Add-to-cart.png";
-import Currency from "./common/currency";
+import Currency from "./common/Currency";
 import SearchOverlay from "./common/search-overlay";
 
 const HeaderNine = ({ logoName }) => {
