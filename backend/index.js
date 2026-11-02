@@ -33,8 +33,24 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  next();
+});
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Health check endpoint (for Docker & monitoring)
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+  });
+});
 
 // Routes
 app.use('/api/users', userRoutes);
@@ -43,11 +59,6 @@ app.use('/api/categories', categoryRoutes);
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 app.use('/api/orders', orderRoutes);  // Ensure correct path and endpoint
 app.use('/api/dashboard', dashboardRoutes);
-// Logging middleware
-app.use((req, res, next) => {
-  console.log(`Received request: ${req.method} ${req.path}`);
-  next();
-});
 
 const PORT = process.env.PORT || 5000;
 

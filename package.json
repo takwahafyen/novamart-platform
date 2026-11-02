@@ -1,17 +1,20 @@
 {
-  "name": "e-commerce",
+  "name": "novamart-platform",
   "version": "1.0.0",
-  "description": "MERN Stack E-Commerce Project",
-  "main": "index.js",
+  "description": "Full-Stack Enterprise Commerce Platform with Next.js, Express & MongoDB",
+  "main": "backend/index.js",
   "type": "module",
   "scripts": {
     "backend": "nodemon backend/index.js",
     "frontend": "npm run dev --prefix frontend",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend"
+    "admin": "npm run dev --prefix admin-dash",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
   },
-  "keywords": [],
-  "author": "HuXn WebDev",
-  "license": "ISC",
+  "keywords": ["ecommerce", "nextjs", "express", "mongodb", "docker", "ci-cd"],
+  "author": "",
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
