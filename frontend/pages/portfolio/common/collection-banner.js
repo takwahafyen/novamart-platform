@@ -1,17 +1,11 @@
 import React from 'react';
 import FashionBanner from '../../layouts/Fashion/Components/Collection-Banner';
-import ElectronicBanner from '../../layouts/Electronic/Electronic-2/component/collection';
-import WatchBanner from '../../layouts/Watch/components/Collection';
-import FurnitureBanner from '../../layouts/Marketplace/components/Collections';
 import { Container, Row, Col, Card, CardBody } from 'reactstrap';
 
 const CollectionBannerPage = () => {
     return (
         <>
             <FashionBanner />
-            <ElectronicBanner />
-            <WatchBanner />
-            <FurnitureBanner />
             <section className="section-b-space element-detail">
                 <Container>
                     <Row>

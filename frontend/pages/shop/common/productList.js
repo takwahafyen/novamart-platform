@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Col, Row, Media, Button, Spinner } from "reactstrap";
-import Menu2 from "../../../public/assets/images/mega-menu/2.jpg";
+// Use string path to avoid webpack build failure on missing template asset
+const Menu2 = { src: "/assets/images/mega-menu/2.jpg" };
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client";
 import FilterContext from "../../../helpers/filter/FilterContext";
