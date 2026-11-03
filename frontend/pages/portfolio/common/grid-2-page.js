@@ -39,14 +39,13 @@ const GET_PRODUCTS = gql`
   }
 `;
 
-const images = [require("../../../public/assets/images/pets/pro/9.jpg"), require("../../../public/assets/images/pets/pro/2.jpg"), require("../../../public/assets/images/pets/pro/12.jpg"), require("../../../public/assets/images/pets/pro/13.jpg"), require("../../../public/assets/images/pets/pro/10.jpg"), require("../../../public/assets/images/pets/pro/11.jpg"), require("../../../public/assets/images/pets/pro/14.jpg"), require("../../../public/assets/images/pets/pro/8.jpg")];
-
-const fashionImages = [require("../../../public/assets/images/pro3/39.jpg"), require("../../../public/assets/images/pro3/3.jpg"), require("../../../public/assets/images/pro3/1.jpg"), require("../../../public/assets/images/pro3/8.jpg"), require("../../../public/assets/images/pro3/9.jpg"), require("../../../public/assets/images/pro3/11.jpg"), require("../../../public/assets/images/pro3/13.jpg"), require("../../../public/assets/images/pro3/14.jpg")];
-
-const bagImages = [require("../../../public/assets/images/pro1/1.jpg"), require("../../../public/assets/images/pro1/4.jpg"), require("../../../public/assets/images/pro1/10.jpg"), require("../../../public/assets/images/pro1/2.jpg"), require("../../../public/assets/images/pro1/16.jpg"), require("../../../public/assets/images/pro1/7.jpg"), require("../../../public/assets/images/pro1/4.jpg"), require("../../../public/assets/images/pro1/12.jpg")];
-
-const shoesImages = [require("../../../public/assets/images/pro/1.jpg"), require("../../../public/assets/images/pro/16.jpg"), require("../../../public/assets/images/pro/23.jpg"), require("../../../public/assets/images/pro/26.jpg"), require("../../../public/assets/images/pro/6.jpg"), require("../../../public/assets/images/pro/33.jpg"), require("../../../public/assets/images/pro/37.jpg"), require("../../../public/assets/images/pro/13.jpg")];
-const watchImages = [require("../../../public/assets/images/pro2/2.jpg"), require("../../../public/assets/images/pro2/3.jpg"), require("../../../public/assets/images/pro2/6.jpg"), require("../../../public/assets/images/pro2/15.jpg"), require("../../../public/assets/images/pro2/8.jpg"), require("../../../public/assets/images/pro2/9.jpg"), require("../../../public/assets/images/pro2/13.jpg"), require("../../../public/assets/images/pro2/4.jpg")];
+// Use fallback string path objects to avoid webpack failure on missing template assets
+const defaultImg = { default: { src: "/assets/images/empty-search.jpg" } };
+const images = Array(8).fill(defaultImg);
+const fashionImages = Array(8).fill(defaultImg);
+const bagImages = Array(8).fill(defaultImg);
+const shoesImages = Array(8).fill(defaultImg);
+const watchImages = Array(8).fill(defaultImg);
 
 const GridTwoPage = ({ colClass, limit }) => {
   const l = parseInt(limit);

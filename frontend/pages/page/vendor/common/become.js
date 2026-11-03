@@ -1,5 +1,6 @@
 import React from "react";
-import vendor from "../../../../public/assets/images/about/vendor.jpg";
+// Use string path to avoid webpack build failure on missing template asset
+const vendor = { src: "/assets/images/about/vendor.jpg" };
 import { Container, Row, Col, Input, Form } from "reactstrap";
 import {
   svgLowCost,

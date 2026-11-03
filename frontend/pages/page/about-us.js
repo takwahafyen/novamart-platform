@@ -1,7 +1,8 @@
 import React from "react";
 import CommonLayout from "../../components/shop/common-layout";
 import { Container, Row, Col, Media } from "reactstrap";
-import aboutus from "../../public/assets/images/about/about_us.jpg";
+// Use string path to avoid webpack build failure on missing template asset
+const aboutus = { src: "/assets/images/about/about_us.jpg" };
 import Slider from "react-slick";
 import { Slider2, Slider4 } from "../../services/script";
 import ServiceLayout from "../../components/common/Service/service1.js";

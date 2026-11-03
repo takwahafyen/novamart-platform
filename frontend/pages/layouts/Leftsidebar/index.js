@@ -5,7 +5,7 @@ import Products from "../../../components/common/Collections/Collection12";
 // import { withApollo } from "../../../helpers/apollo/apollo";
 import Service from "../../../components/common/Service/service1";
 import Blog from "../../../components/common/Blog/blog1";
-import Instgram from "../../../components/common/instagram/insragram3";
+import Instgram from "../../../components/common/instagram/instagram3";
 import LogoBlock from "../../../components/common/logo-block";
 import ModalComponent from "../../../components/common/Modal";
 import MasterFooter from "../../../components/footers/common/MasterFooter";

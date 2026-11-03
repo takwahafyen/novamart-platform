@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import CommonLayout from '../../components/shop/common-layout';
 import { Container, Row, Col, Media } from 'reactstrap';
-import one from '../../public/assets/images/pro3/1.jpg';
 import CartContext from '../../helpers/cart';
 import { CurrencyContext } from '../../helpers/Currency/CurrencyContext';
 

@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
 import Slider from "react-slick";
 import { Container, Row, Col, Media } from "reactstrap";
-import tool3 from "../../../../public/assets/images/tools/3.png";
-import tool4 from "../../../../public/assets/images/tools/4.png";
-import tool1 from "../../../../public/assets/images/tools/1.png";
+// Use string paths to avoid webpack build failure on missing template assets
+const tool3 = { src: "/assets/images/tools/3.png" };
+const tool4 = { src: "/assets/images/tools/4.png" };
+const tool1 = { src: "/assets/images/tools/1.png" };
 
 const Banner = () => {
   return (

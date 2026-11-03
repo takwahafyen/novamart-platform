@@ -2,7 +2,8 @@ import React from 'react';
 import CommonLayout from '../../components/shop/common-layout';
 // import { withApollo } from '../../helpers/apollo/apollo';
 import { Media, Container, Row, Col } from 'reactstrap';
-import menu2 from '../../public/assets/images/mega-menu/2.jpg';
+// Use string path to avoid webpack build failure on missing template asset
+const menu2 = { src: "/assets/images/mega-menu/2.jpg" };
 import Products from "../../components/common/Collections/Collection12";
 
 const Metro = () => {

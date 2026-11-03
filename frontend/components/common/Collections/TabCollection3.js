@@ -7,7 +7,8 @@ import ProductItem from "../product-box/ProductBox12";
 import CartContext from "../../../helpers/cart/index";
 import { Container, Media, Col, Row } from "reactstrap";
 import { WishlistContext } from "../../../helpers/wishlist/WishlistContext";
-import banner from "../../../public/assets/images/tools/banner.jpg";
+// Use string path instead of static import to avoid build failure if image is missing
+const bannerSrc = "/assets/images/tools/banner.jpg";
 import { CurrencyContext } from "../../../helpers/Currency/CurrencyContext";
 import { Product4 } from "../../../services/script";
 import { CompareContext } from "../../../helpers/Compare/CompareContext";
@@ -137,7 +138,7 @@ const NewProduct = ({ type, designClass, cartClass, spanClass }) => {
                 </Tabs>
               </Container>
               <div className="banner-tools">
-                <Media src={banner.src} alt="" className="img-fluid" />
+                <Media src={bannerSrc} alt="" className="img-fluid" />
               </div>
             </Col>
           </Row>

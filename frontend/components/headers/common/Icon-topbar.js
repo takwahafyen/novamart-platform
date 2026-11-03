@@ -8,7 +8,7 @@ import Link from "next/link";
 import search from "../../../public/assets/images/icon/search.png";
 import settings from "../../../public/assets/images/icon/setting.png";
 import cart from "../../../public/assets/images/icon/shopping-cart.png";
-import Currency from "../common/currency";
+import Currency from "./Currency";
 import CartContainer from "../../containers/CartContainer";
 import SearchOverlay from "./search-overlay";
 import { useRouter } from "next/router";

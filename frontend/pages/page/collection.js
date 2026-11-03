@@ -1,14 +1,15 @@
 import React from "react";
 import CommonLayout from "../../components/shop/common-layout";
 import { Container, Media, Row, Col } from "reactstrap";
-import one from "../../public/assets/images/collection/1.jpg";
-import three from "../../public/assets/images/collection/3.jpg";
-import five from "../../public/assets/images/collection/5.jpg";
-import six from "../../public/assets/images/collection/6.jpg";
-import seven from "../../public/assets/images/collection/7.jpg";
-import eight from "../../public/assets/images/collection/8.jpg";
-import nine from "../../public/assets/images/collection/9.jpg";
-import eleven from "../../public/assets/images/collection/11.jpg";
+// Use string paths to avoid webpack build failure on missing template assets
+const one = { src: "/assets/images/collection/1.jpg" };
+const three = { src: "/assets/images/collection/3.jpg" };
+const five = { src: "/assets/images/collection/5.jpg" };
+const six = { src: "/assets/images/collection/6.jpg" };
+const seven = { src: "/assets/images/collection/7.jpg" };
+const eight = { src: "/assets/images/collection/8.jpg" };
+const nine = { src: "/assets/images/collection/9.jpg" };
+const eleven = { src: "/assets/images/collection/11.jpg" };
 
 const MasterCollectionData = [
   {

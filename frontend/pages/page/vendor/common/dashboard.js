@@ -21,16 +21,17 @@ import {
   Button,
   Label,
 } from "reactstrap";
-import seventeen from "../../../../public/assets/images/logos/17.png";
-import order from "../../../../public/assets/images/icon/dashboard/order.png";
-import sale from "../../../../public/assets/images/icon/dashboard/sale.png";
-import homework from "../../../../public/assets/images/icon/dashboard/homework.png";
-import one from "../../../../public/assets/images/dashboard/product/1.jpg";
-import nine from "../../../../public/assets/images/dashboard/product/9.jpg";
-import thirtyfour from "../../../../public/assets/images/pro3/34.jpg";
-import pro1 from "../../../../public/assets/images/pro3/1.jpg";
-import pro27 from "../../../../public/assets/images/pro3/27.jpg";
-import pro36 from "../../../../public/assets/images/pro3/36.jpg";
+// Use string paths to avoid webpack build failure on missing template assets
+const seventeen = { src: "/assets/images/logos/17.png" };
+const order = { src: "/assets/images/icon/dashboard/order.png" };
+const sale = { src: "/assets/images/icon/dashboard/sale.png" };
+const homework = { src: "/assets/images/icon/dashboard/homework.png" };
+const one = { src: "/assets/images/dashboard/product/1.jpg" };
+const nine = { src: "/assets/images/dashboard/product/9.jpg" };
+const thirtyfour = { src: "/assets/images/pro3/34.jpg" };
+const pro1 = { src: "/assets/images/pro3/1.jpg" };
+const pro27 = { src: "/assets/images/pro3/27.jpg" };
+const pro36 = { src: "/assets/images/pro3/36.jpg" };
 import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 

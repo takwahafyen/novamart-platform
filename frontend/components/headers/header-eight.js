@@ -8,7 +8,7 @@ import CartContainer from "../containers/CartContainer";
 import search from "../../public/assets/images/icon/layout4/search.png";
 import settings from "../../public/assets/images/icon/layout4/setting.png";
 import cart from "../../public/assets/images/icon/cart.png";
-import Currency from "./common/currency";
+import Currency from "./common/Currency";
 import SearchOverlay from "./common/search-overlay";
 
 const HeaderEight = ({ logoName }) => {

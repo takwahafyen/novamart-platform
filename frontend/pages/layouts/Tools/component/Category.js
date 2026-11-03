@@ -2,11 +2,12 @@ import React, { Fragment } from "react";
 import Slider from "react-slick";
 import { Slider4 } from "../../../../services/script";
 import { Media, Container, Col, Row } from "reactstrap";
-import category1 from "../../../../public/assets/images/tools/category/1.jpg";
-import category2 from "../../../../public/assets/images/tools/category/2.jpg";
-import category3 from "../../../../public/assets/images/tools/category/3.jpg";
-import category4 from "../../../../public/assets/images/tools/category/4.jpg";
-import category5 from "../../../../public/assets/images/tools/category/5.jpg";
+// Use string paths to avoid webpack build failure on missing template assets
+const category1 = { src: "/assets/images/tools/category/1.jpg" };
+const category2 = { src: "/assets/images/tools/category/2.jpg" };
+const category3 = { src: "/assets/images/tools/category/3.jpg" };
+const category4 = { src: "/assets/images/tools/category/4.jpg" };
+const category5 = { src: "/assets/images/tools/category/5.jpg" };
 
 const Data = [
   {

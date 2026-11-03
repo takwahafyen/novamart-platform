@@ -9,7 +9,7 @@ import { Media, Row, Col, Container } from "reactstrap";
 import search from "../../public/assets/images/icon/search.png";
 import settings from "../../public/assets/images/icon/setting.png";
 import cart from "../../public/assets/images/icon/cart.png";
-import Currency from "./common/currency";
+import Currency from "./common/Currency";
 import SearchOverlay from "./common/search-overlay";
 
 const HeaderFive = ({ logoName, topClass, direction }) => {
