@@ -5,7 +5,9 @@ import Category from '../models/Category.js';
 export const addProduct = async (req, res) => {
   try {
     const { name, brand, quantity, categoryId, description, price, countInStock } = req.body;
-    const images = req.files.map(file => `/uploads/${file.filename}`);
+    let images = (req.files && req.files.length > 0)
+      ? req.files.map(file => `/uploads/${file.filename}`)
+      : (Array.isArray(req.body.images) ? req.body.images : (req.body.images ? [req.body.images] : ['/assets/images/placeholder.png']));
 
     if (!mongoose.Types.ObjectId.isValid(categoryId)) {
       return res.status(400).json({ message: 'Invalid category ID' });
@@ -79,10 +81,10 @@ export const updateProduct = async (req, res) => {
     }
 
     const { name, brand, quantity, categoryId, description, price, countInStock } = req.body;
-    const images = req.files.map(file => `/uploads/${file.filename}`);
+    const newImages = (req.files && req.files.length > 0) ? req.files.map(file => `/uploads/${file.filename}`) : [];
 
     product.name = name || product.name;
-    product.images = images.length ? images : product.images;
+    product.images = newImages.length ? newImages : product.images;
     product.brand = brand || product.brand;
     product.quantity = quantity || product.quantity;
     product.category = categoryId || product.category;

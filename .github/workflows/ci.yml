@@ -22,7 +22,7 @@ jobs:
           cache-dependency-path: package.json
 
       - name: Install Root Dependencies
-        run: npm ci
+        run: npm install
 
       - name: Validate Backend Syntax
         run: node --check backend/index.js
