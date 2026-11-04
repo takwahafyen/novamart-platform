@@ -3,11 +3,12 @@ import Order from '../models/orderModel.js';
 import Product from '../models/productModel.js';
 import User from '../models/User.mjs';
 import Category from '../models/Category.js';
+import { protect, admin } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
-// Endpoint to get dashboard data including product count per category
-router.get('/dashboard-data', async (req, res) => {
+// Endpoint to get dashboard data — admin only
+router.get('/dashboard-data', protect, admin, async (req, res) => {
     try {
         // Count documents for each model
         const orderCount = await Order.countDocuments();

@@ -1,9 +1,11 @@
 import express from 'express';
 import { addProduct, getProducts, deleteProduct, updateProduct, getProductById, getProductsByCategory } from '../controllers/productController.js';
+import { protect, admin } from '../middlewares/authMiddleware.js';
 import multer from 'multer';
 
 const router = express.Router();
 
+// --- Multer configuration with security ---
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -13,13 +15,29 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const fileFilter = (req, file, cb) => {
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+  if (allowedTypes.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('Invalid file type. Only JPEG, PNG, and WebP are allowed.'), false);
+  }
+};
 
-router.post('/', upload.array('images', 10), addProduct);
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB max
+});
+
+// Public routes — anyone can browse products
 router.get('/', getProducts);
 router.get('/:id', getProductById);
-router.get('/category/:categoryName', getProductsByCategory); // Route for getting products by category
-router.delete('/:id', deleteProduct);
-router.put('/:id', upload.array('images', 10), updateProduct);
+router.get('/category/:categoryName', getProductsByCategory);
+
+// Admin-only routes — CRUD operations
+router.post('/', protect, admin, upload.array('images', 10), addProduct);
+router.put('/:id', protect, admin, upload.array('images', 10), updateProduct);
+router.delete('/:id', protect, admin, deleteProduct);
 
 export default router;
