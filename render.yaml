@@ -4,7 +4,7 @@ services:
     runtime: node
     plan: free
     region: frankfurt # or oregon
-    buildCommand: npm install --omit=dev
+    buildCommand: npm install --omit=dev --no-audit
     startCommand: node backend/index.js
     healthCheckPath: /api/health
     envVars:
