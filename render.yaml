@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: novamart-backend
+    runtime: node
+    plan: free
+    region: frankfurt # or oregon
+    buildCommand: npm install --omit=dev
+    startCommand: node backend/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
