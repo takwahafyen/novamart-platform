@@ -27,6 +27,12 @@ jobs:
       - name: Validate Backend Syntax
         run: node --check backend/index.js
 
+      - name: Run Backend Automated Tests
+        run: npm test
+        env:
+          NODE_ENV: test
+          JWT_SECRET: ci_test_jwt_secret_token_12345
+
   frontend-build:
     name: Frontend (Storefront) Build Check
     runs-on: ubuntu-latest
