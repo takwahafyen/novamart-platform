@@ -1,36 +1,31 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import CommonLayout from '../../../components/shop/common-layout';
 import { Container, Row, Form, Label, Input, Col } from 'reactstrap';
 import { useRouter } from 'next/router';
+import api from '../../../services/api';
 
 const Login = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const loginAuth = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:5000/api/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    setError('');
+    setLoading(true);
 
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('user', JSON.stringify(data));
-        router.push('/'); // Redirect to home page after login
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message);
-      }
-    } catch (error) {
-      console.error('Login failed:', error);
-      setError('Login failed. Please try again.');
+    try {
+      const data = await api.auth.login(email, password);
+      localStorage.setItem('user', JSON.stringify(data));
+      router.push('/');
+    } catch (err) {
+      console.error('Login failed:', err);
+      setError(err.message || 'Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,16 +63,20 @@ const Login = () => {
                       required
                     />
                   </div>
-                  <button type="submit" className="btn btn-solid">Login</button>
+                  <button type="submit" className="btn btn-solid" disabled={loading}>
+                    {loading ? 'Logging in...' : 'Login'}
+                  </button>
                 </Form>
               </div>
             </Col>
             <Col lg="6" className="right-login">
               <h3>New Customer</h3>
               <div className="theme-card authentication-right">
-                <h6 className="title-font">Create A Account</h6>
-                <p>Sign up for a free account at our store. Registration is quick and easy. It allows you to be able to order from our shop. To start shopping click register.</p>
-                <a href="/page/account/register" className="btn btn-solid">Create an Account</a>
+                <h6 className="title-font">Create An Account</h6>
+                <p>Sign up for a free account at our store. Registration is quick and easy. It allows you to order and track your shipments effortlessly.</p>
+                <Link href="/page/account/register" className="btn btn-solid">
+                  Create an Account
+                </Link>
               </div>
             </Col>
           </Row>
