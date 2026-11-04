@@ -1,6 +1,15 @@
 import express from 'express';
-import { addProduct, getProducts, deleteProduct, updateProduct, getProductById, getProductsByCategory } from '../controllers/productController.js';
+import {
+  addProduct,
+  getProducts,
+  deleteProduct,
+  updateProduct,
+  getProductById,
+  getProductsByCategory,
+} from '../controllers/productController.js';
 import { protect, admin } from '../middlewares/authMiddleware.js';
+import { validate } from '../middlewares/validate.js';
+import { addProductSchema, updateProductSchema } from '../validators/schemas.js';
 import multer from 'multer';
 
 const router = express.Router();
@@ -35,9 +44,9 @@ router.get('/', getProducts);
 router.get('/:id', getProductById);
 router.get('/category/:categoryName', getProductsByCategory);
 
-// Admin-only routes — CRUD operations
-router.post('/', protect, admin, upload.array('images', 10), addProduct);
-router.put('/:id', protect, admin, upload.array('images', 10), updateProduct);
+// Admin-only routes — CRUD operations with Zod validation
+router.post('/', protect, admin, upload.array('images', 10), validate(addProductSchema), addProduct);
+router.put('/:id', protect, admin, upload.array('images', 10), validate(updateProductSchema), updateProduct);
 router.delete('/:id', protect, admin, deleteProduct);
 
 export default router;
