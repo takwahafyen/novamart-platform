@@ -14,8 +14,23 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Global Middlewares
-app.use(cors());
+// Dynamic CORS configuration (supports production frontend domains)
+const allowedOrigins = process.env.CLIENT_URL
+  ? process.env.CLIENT_URL.split(',').map((url) => url.trim())
+  : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5000'];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. mobile apps, curl, Supertest, server-to-server)
+      if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`Origin ${origin} not allowed by CORS policy`));
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
