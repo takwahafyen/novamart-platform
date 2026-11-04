@@ -32,6 +32,7 @@ export const registerUser = async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
   } catch (error) {
@@ -66,6 +67,7 @@ export const loginUser = async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      isAdmin: user.isAdmin,
       token: generateToken(user._id),
     });
   } catch (error) {
@@ -77,7 +79,7 @@ export const loginUser = async (req, res) => {
 // Get All Users
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({});
+    const users = await User.find({}).select('-password');
     res.json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -88,7 +90,7 @@ export const getAllUsers = async (req, res) => {
 // Get User by ID
 export const getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).select('-password');
     if (user) {
       res.json(user);
     } else {
