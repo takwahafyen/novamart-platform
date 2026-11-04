@@ -3,8 +3,8 @@
 # ============================================
 FROM node:18-alpine AS deps
 WORKDIR /app
-COPY backend/package*.json ./
-RUN npm ci --only=production
+COPY package*.json ./
+RUN npm install --omit=dev
 
 # ============================================
 # Stage 2: Production image
@@ -18,12 +18,13 @@ RUN addgroup --system --gid 1001 nodejs \
 
 # Copy production dependencies
 COPY --from=deps /app/node_modules ./node_modules
+COPY package.json ./
 
 # Copy backend source code
-COPY backend/ ./
+COPY backend/ ./backend/
 
-# Create uploads directory
-RUN mkdir -p uploads && chown appuser:nodejs uploads
+# Create uploads directory with correct permissions
+RUN mkdir -p uploads && chown -R appuser:nodejs /app
 
 USER appuser
 
@@ -34,4 +35,4 @@ ENV NODE_ENV=production
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:5000/api/health || exit 1
 
-CMD ["node", "index.js"]
+CMD ["node", "backend/index.js"]
