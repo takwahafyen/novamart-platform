@@ -9,7 +9,8 @@
     "frontend": "npm run dev --prefix frontend",
     "admin": "npm run dev --prefix admin-dash",
     "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down"
   },
@@ -32,7 +33,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "jest": "^29.7.0",
-    "supertest": "^7.0.0"
+    "supertest": "^7.0.0",
+    "vitest": "^1.6.0"
   }
 }

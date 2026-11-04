@@ -1,3 +1,4 @@
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 import jwt from 'jsonwebtoken';
 import { protect, admin } from '../../backend/middlewares/authMiddleware.js';
 import User from '../../backend/models/User.mjs';
@@ -14,11 +15,11 @@ describe('Auth Middleware - protect', () => {
       headers: {},
     };
     res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
+      status: vi.fn().mockReturnThis(),
+      json: vi.fn(),
     };
-    next = jest.fn();
-    jest.clearAllMocks();
+    next = vi.fn();
+    vi.clearAllMocks();
   });
 
   test('should return 401 if no authorization header is provided', async () => {
@@ -54,8 +55,8 @@ describe('Auth Middleware - protect', () => {
     const validToken = jwt.sign({ userId: '507f1f77bcf86cd799439011' }, process.env.JWT_SECRET);
     req.headers.authorization = `Bearer ${validToken}`;
 
-    jest.spyOn(User, 'findById').mockReturnValue({
-      select: jest.fn().mockResolvedValue(null),
+    vi.spyOn(User, 'findById').mockReturnValue({
+      select: vi.fn().mockResolvedValue(null),
     });
 
     await protect(req, res, next);
@@ -76,8 +77,8 @@ describe('Auth Middleware - protect', () => {
     const validToken = jwt.sign({ userId: mockUser._id }, process.env.JWT_SECRET);
     req.headers.authorization = `Bearer ${validToken}`;
 
-    jest.spyOn(User, 'findById').mockReturnValue({
-      select: jest.fn().mockResolvedValue(mockUser),
+    vi.spyOn(User, 'findById').mockReturnValue({
+      select: vi.fn().mockResolvedValue(mockUser),
     });
 
     await protect(req, res, next);
@@ -95,10 +96,10 @@ describe('Auth Middleware - admin', () => {
 
   beforeEach(() => {
     res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
+      status: vi.fn().mockReturnThis(),
+      json: vi.fn(),
     };
-    next = jest.fn();
+    next = vi.fn();
   });
 
   test('should return 403 if req.user is missing', () => {

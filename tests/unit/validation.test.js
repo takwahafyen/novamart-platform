@@ -1,3 +1,4 @@
+import { describe, test, expect, vi } from 'vitest';
 import {
   registerSchema,
   loginSchema,
@@ -150,10 +151,10 @@ describe('Validate Middleware', () => {
     const middleware = validate(loginSchema);
     const req = { body: { email: 'notanemail' } };
     const res = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
+      status: vi.fn().mockReturnThis(),
+      json: vi.fn(),
     };
-    const next = jest.fn();
+    const next = vi.fn();
 
     middleware(req, res, next);
 
@@ -171,7 +172,7 @@ describe('Validate Middleware', () => {
     const middleware = validate(loginSchema);
     const req = { body: { email: 'USER@EXAMPLE.COM', password: 'secretpassword' } };
     const res = {};
-    const next = jest.fn();
+    const next = vi.fn();
 
     middleware(req, res, next);
 
