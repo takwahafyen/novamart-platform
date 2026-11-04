@@ -15,9 +15,9 @@ export const registerSchema = z.object({
     .trim(),
   email: z
     .string({ required_error: 'Email is required' })
-    .email('Invalid email format')
+    .trim()
     .toLowerCase()
-    .trim(),
+    .pipe(z.string().email('Invalid email format')),
   password: z
     .string({ required_error: 'Password is required' })
     .min(8, 'Password must be at least 8 characters')
@@ -29,9 +29,9 @@ export const registerSchema = z.object({
 export const loginSchema = z.object({
   email: z
     .string({ required_error: 'Email is required' })
-    .email('Invalid email format')
+    .trim()
     .toLowerCase()
-    .trim(),
+    .pipe(z.string().email('Invalid email format')),
   password: z
     .string({ required_error: 'Password is required' })
     .min(1, 'Password is required'),
@@ -40,7 +40,7 @@ export const loginSchema = z.object({
 export const updateUserSchema = z.object({
   firstName: z.string().min(2).max(50).trim().optional(),
   lastName: z.string().min(2).max(50).trim().optional(),
-  email: z.string().email('Invalid email format').toLowerCase().trim().optional(),
+  email: z.string().trim().toLowerCase().pipe(z.string().email('Invalid email format')).optional(),
 });
 
 // ─── Product Schemas ────────────────────────────────────────────
@@ -96,7 +96,7 @@ export const createOrderSchema = z.object({
   first_name: z.string().min(2).max(50).trim(),
   last_name: z.string().min(2).max(50).trim(),
   phone: z.string().regex(/^\d{8,15}$/, 'Phone must be 8-15 digits'),
-  email: z.string().email('Invalid email format').toLowerCase().trim(),
+  email: z.string().trim().toLowerCase().pipe(z.string().email('Invalid email format')),
   country: z.string().min(2).max(60).trim(),
   address: z.string().min(5).max(200).trim(),
   city: z.string().min(2).max(60).trim(),
