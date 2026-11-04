@@ -8,6 +8,7 @@ on:
       - 'Dockerfile'
       - '.dockerignore'
       - '.github/workflows/backend-docker.yml'
+      - 'package*.json'
 
 jobs:
   build-and-push:
