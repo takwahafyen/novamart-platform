@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import CommonLayout from '../../../components/shop/common-layout';
 import { Container, Row, Form, Label, Input, Col } from 'reactstrap';
 import { useRouter } from 'next/router';
+import api from '../../../services/api';
 
 const Register = () => {
   const router = useRouter();
@@ -10,28 +12,21 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setError('');
+    setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/users/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ firstName, lastName, email, password }),
-      });
-
-      if (response.ok) {
-        router.push('/page/account/login'); // Redirect to login page after registration
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message);
-      }
-    } catch (error) {
-      console.error('Registration failed:', error);
-      setError('Registration failed. Please try again.');
+      await api.auth.register({ firstName, lastName, email, password });
+      router.push('/page/account/login');
+    } catch (err) {
+      console.error('Registration failed:', err);
+      setError(err.message || 'Registration failed. Please verify your information.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,7 +36,7 @@ const Register = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <h3>Register</h3>
+              <h3>Create An Account</h3>
               <div className="theme-card">
                 {error && <div className="alert alert-danger">{error}</div>}
                 <Form className="theme-form" onSubmit={handleRegister}>
@@ -88,7 +83,7 @@ const Register = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <Label className="form-label" htmlFor="password">Password</Label>
+                    <Label className="form-label" htmlFor="password">Password (min 8 chars, 1 uppercase, 1 lowercase, 1 number)</Label>
                     <Input
                       type="password"
                       value={password}
@@ -99,7 +94,17 @@ const Register = () => {
                       required
                     />
                   </div>
-                  <button type="submit" className="btn btn-solid">Register</button>
+                  <div className="d-flex align-items-center gap-3">
+                    <button type="submit" className="btn btn-solid" disabled={loading}>
+                      {loading ? 'Creating account...' : 'Register'}
+                    </button>
+                    <span className="ms-3">
+                      Already have an account?{' '}
+                      <Link href="/page/account/login" className="text-decoration-underline">
+                        Log in here
+                      </Link>
+                    </span>
+                  </div>
                 </Form>
               </div>
             </Col>

@@ -4,7 +4,7 @@ import CartContext from "../../../../helpers/cart";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { CurrencyContext } from "../../../../helpers/Currency/CurrencyContext";
-import axios from 'axios';
+import api from "../../../../services/api";
 
 const CheckoutPage = () => {
   const cartContext = useContext(CartContext);
@@ -22,40 +22,32 @@ const CheckoutPage = () => {
 
   const onSubmit = async (data) => {
     try {
-      // Validate and structure order data
-      const orderData = {
-        ...data,
-        cartItems: cartItems.map(item => ({
-          title: item.title || 'Unknown',  // Ensure title is provided
-          qty: item.qty || 1,              // Default quantity if missing
-          total: item.total || 0           // Default total if missing
+      const orderPayload = {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        phone: data.phone,
+        email: data.email,
+        country: data.country,
+        address: data.address,
+        city: data.city,
+        state: data.state,
+        pincode: data.pincode,
+        paymentMethod: payment === 'stripe' ? 'Stripe' : (payment === 'paypal' ? 'PayPal' : 'COD'),
+        items: cartItems.map((item) => ({
+          productId: item._id || item.id || '507f1f77bcf86cd799439011',
+          qty: Number(item.qty) || 1,
         })),
-        cartTotal,
-        paymentMethod: payment,
-        orderStatus: 'Pending',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
       };
 
-      // Adjusted API endpoint
-      const response = await axios.post('http://localhost:5000/api/orders', orderData, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      await api.orders.create(orderPayload);
 
-      if (response.status === 201) {
-        router.push({
-          pathname: "/page/order-success",
-          state: { items: cartItems, orderTotal: cartTotal, symbol: symbol },
-        });
-      } else {
-        alert('Order submission failed. Please try again.');
-      }
+      router.push({
+        pathname: "/page/order-success",
+        state: { items: cartItems, orderTotal: cartTotal, symbol: symbol },
+      });
     } catch (error) {
-      console.error('Error submitting order:', error.response ? error.response.data : error.message);
-      alert('Order submission failed. Please try again.');
+      console.error('Error submitting order:', error);
+      alert(error.message || 'Order submission failed. Please try again.');
     }
   };
 
